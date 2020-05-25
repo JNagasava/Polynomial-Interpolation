@@ -28,8 +28,9 @@ def solve_sys(X, Y):
     for j in range(Z.shape[0] - 1):
         pivot = partial_pivoting(Z, j)
         for i in range(j + 1, Z.shape[0]):
-            m = pivot / Z[i, j]
-            Z[i, j:] = Z[j, j:] - (m * Z[i, j:])
+            if Z[i, j] != 0 : 
+                m = pivot / Z[i, j]
+                Z[i, j:] = Z[j, j:] - (m * Z[i, j:])
 
     A = np.zeros((X.shape[0], 1))
     for k in range(Z.shape[0] - 1, -1, -1):
