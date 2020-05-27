@@ -79,7 +79,7 @@ def cubic_spline(X, Y):
         k = bisect_right(X, x) - 1
         if k == n - 1:
             k -= 1
-        return S[k - 1](x)
+        return S[k](x)
 
     return f
 
