@@ -2,10 +2,10 @@
 Controls interpolation methods and manages X and Y values
 """
 
-import interpolation.methods.linsys as lsy
+import interpolation.methods.linear_systems as lsy
 import interpolation.methods.lagrange as lgr
 import interpolation.methods.newton as ntw
-import interpolation.methods.spline as spl
+import interpolation.methods.cubic_spline as spl
 
 import numpy as np
 

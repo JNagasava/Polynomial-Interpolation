@@ -3,7 +3,7 @@ Cubic Spline (Polynomial Interpolation by parts)
 """
 
 import numpy as np 
-import interpolation.methods.linsys as linsys
+import interpolation.methods.linear_system as lys
 from bisect import bisect_right
 
 def Ak(Y2d, H, k):
@@ -169,7 +169,7 @@ def cubic_spline(X, Y):
     B = [ 6 * ((Y[k + 2] - Y[k + 1]) / H[k + 1] - (Y[k + 1] - Y[k]) / H[k]) for k in range(m)]
 
     # Y2d
-    Y2d = linsys.solve_sys(A, B)
+    Y2d = lys.solve_sys(A, B)
     Y2d = [0, *Y2d, 0]
 
     # Sk
