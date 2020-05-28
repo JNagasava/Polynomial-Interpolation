@@ -1,8 +1,23 @@
+"""
+Newton (Polynomial Interpolation)
+"""
+
 import numpy as np 
 
 def newton(X, Y):
     """
     Polynomial Interpolation using Newton's method
+
+    Parameters
+    ------------
+        X : list
+            list of x values
+        Y : list
+            list of y values
+    Returns
+    -------
+        function
+            function of polynomial interpolation (using  newton's method)
     """
     n = len(X)
     K = np.zeros((n, n))

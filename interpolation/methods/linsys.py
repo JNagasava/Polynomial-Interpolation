@@ -1,8 +1,21 @@
+"""
+Linear System (Polynomial Interpolation)
+"""
+
 import numpy as np 
 
 def swap_rows(Z, a, b):
     """
-    Swap two rows (a, b) of a matrix 
+    Swap two rows (a, b) from Z matrix (np.array)
+
+    Parameters
+    ----------
+        Z : np.array
+            matrix
+        a : int
+            index row from Z
+        b : int 
+            index row from Z 
     """
     temp = np.copy(Z[a])
     Z[a] = Z[b]
@@ -10,8 +23,19 @@ def swap_rows(Z, a, b):
 
 def partial_pivoting(Z, row):
     """
-    Partial pivoting of Z matrix, starting at row(parameter)
-    @return pivot
+    Partial pivoting of Z matrix, starting at row param
+
+    Parameters
+    ----------
+        Z : np.array
+            matrix
+        row : int
+            index row from Z
+    
+    Returns
+    -------
+        pivot : int
+            pivot is the max value from Z(row:,row)
     """
     pivot_row = np.argmax(np.abs(Z[row:, row])) + row
     swap_rows(Z, row, pivot_row)
@@ -21,6 +45,18 @@ def partial_pivoting(Z, row):
 def solve_sys(X, Y):
     """
     Solve a linear system using Gauss Elimination
+
+    Parameters
+    ----------
+        X : list
+            list of x values
+        Y : list
+            list of y values
+
+    Returns
+    -------
+        list
+            returns the roots of linear system (X, Y)
     """
     Z = np.copy(X)
     Z = np.hstack([Z, np.transpose(np.array([Y]))])
@@ -38,34 +74,51 @@ def solve_sys(X, Y):
     
     return np.ndarray.tolist(np.transpose(A))[0]
 
-def vandermond(x):
+def vandermond(X):
     """
-    Create a vandermond matrix(nxn) by x's values  
+    Create a vandermond matrix(nxn) by x values  
+
+    Parameters
+    ----------
+        X : list
+            list of x values
+
+    Returns
+    -------
+        np.array
+            vandermond matrix
     """
-    n = len(x)
+    n = len(X)
     V = np.zeros((n, n))
 
     for i in range(n):
-        V[i, :] = [x[i]**k for k in range(n)]
+        V[i, :] = [X[i]**k for k in range(n)]
 
     return V
-
-def polynomial(A):
-    """
-    Create the polynomial function
-    """
-    def f(x):
-       return sum([a*(x**p) for p, a in enumerate(A)])
-
-    return f
 
 def linsys(X, Y):
     """
     Polynomial Interpolation using Gauss Elimination
+
+    Parameters
+    ----------
+        X : list
+            list of X values
+        Y : list
+            list of Y values
+    
+    Returns
+    -------
+        function
+            function of polynomial interpolation (using linear system)
     """
     V = vandermond(X)
     A = solve_sys(V, Y)
-    return polynomial(A)
+
+    def f(x):
+       return sum([a*(x**p) for p, a in enumerate(A)])
+
+    return f
     
 
         

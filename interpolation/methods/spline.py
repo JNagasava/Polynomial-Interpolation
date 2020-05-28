@@ -1,40 +1,128 @@
+"""
+Cubic Spline (Polynomial Interpolation by parts)
+"""
+
 import numpy as np 
-import methods.linsys as linsys
+import interpolation.methods.linsys as linsys
 from bisect import bisect_right
 
 def Ak(Y2d, H, k):
     """
     Calculate Ak for Sk(x)    
+
+    Parameters
+    ----------
+        Y2d : list
+            list of y values with the second derived
+        H : list
+            list of h values from spline
+        k : int
+            index from Y2d and H
+
+    Returns
+    -------
+        float
+            Ak from cubic spline 
     """
     return (Y2d[k] - Y2d[k - 1]) / (6 * H[k - 1])
 
 def Bk(Y2d, k):
     """
     Calculate Bk for Sk(x)
+
+    Parameters
+    ----------
+        Y2d : list
+            list of y values with the second derived
+        k : int
+            index from Y2d
+
+    Returns
+    -------
+        float
+            Bk from cubic spline 
     """
     return Y2d[k] / 2
 
 def Ck(Y2d, H, Y, k):
     """
     Calculate Ck for Sk(x)
+
+    Parameters
+    ----------
+        Y2d : list
+            list of y values with the second derived
+        H : list
+            list of h values from spline
+        Y : list
+            list of y values
+        k : int
+            index from Y2d, Y, H
+
+    Returns
+    -------
+        float
+            Ck from cubic spline 
     """
     return (Y[k] - Y[k - 1]) / H[k - 1] + (2 * H[k - 1] * Y2d[k] + Y2d[k - 1] * H[k - 1]) / 6 
 
 def Dk(Y, k):
     """
     Calculate Dk for Sk(x)
+
+    Parameters
+    ----------
+        Y : list
+            list of y values
+        k : int
+            index from Y
+    
+    Returns
+    -------
+        float
+            Dk from cubic spline
     """
     return Y[k]
 
 def Hk(X, k):
     """
     Calculate Hk for Sk(x)
+
+    Parameters
+    ----------
+        X : list
+            list of x values
+        k : int
+            index from X
+    
+    Returns 
+    -------
+        float
+            Hk from cubic spline
     """
     return X[k] - X[k - 1]
 
 def Sk(Y2d, H, X, Y, k):
     """
     Create Sk function
+
+    Parameters
+    ----------
+        Y2d : list
+            list of y values with the second derived
+        H : list
+            list of h values from cubic spline
+        X : list
+            list of x values
+        Y : list
+            list of y values
+        k : int
+            index from Y2d, H, X and Y
+    
+    Returns
+    -------
+        function
+            Sk from cubic spline
     """
     def f(x):
         x_diff = x - X[k]
@@ -48,6 +136,18 @@ def Sk(Y2d, H, X, Y, k):
 def cubic_spline(X, Y):
     """
     Polynomal Interpolation by parts using a natural cubic spline
+
+    Parameters
+    ----------
+        X : list
+            list of x values
+        Y : list
+            list of y values
+    
+    Returns
+    -------
+        function
+            function of interpolation by parts (using natural cubic spline)
     """
 
     # H's
@@ -70,9 +170,9 @@ def cubic_spline(X, Y):
 
     # Y2d
     Y2d = linsys.solve_sys(A, B)
-
     Y2d = [0, *Y2d, 0]
 
+    # Sk
     S = [Sk(Y2d, H, X, Y, k) for k in range(1, n)]
 
     def f(x):
