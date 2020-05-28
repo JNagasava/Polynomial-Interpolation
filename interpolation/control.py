@@ -94,7 +94,7 @@ def interpolation_method(method, X, Y):
     newton and cubic_spline
     """
     if method == 'linear_system':
-        return lsy.linsys(X, Y)
+        return lys.linsys(X, Y)
     elif method == 'lagrange':
         return lgr.lagrange(X, Y)
     elif method == 'newton':
