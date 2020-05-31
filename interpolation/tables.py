@@ -1,8 +1,8 @@
 """
 Handles csv files (write and read)
 """
-
 import csv
+from io import TextIOWrapper
 
 def create_csv(X, Y, xlabel, ylabel, name):
     """
@@ -29,35 +29,31 @@ def create_csv(X, Y, xlabel, ylabel, name):
         writer = csv.DictWriter(f, fieldnames=[f'{xlabel}', f'{ylabel}'])
         writer.writeheader()
         writer.writerows([{f'{xlabel}': pair[0], f'{ylabel}': pair[1]} for pair in zip(X, Y)])
-    f.close()
 
-def load_csv(name):
+def load_csv(csv_file):
     """
     Load csv file and return `X`, `Y`, `xlabel` name and `ylabel` name. 
     
     Parameters
     ----------
-        name : str
-            name of file
+        csv_file : str
+            csv file
     
     Returns
     -------
         V : dict
             V is a dictionary which contains X and Y values. 
-    
-    Notes
-    -----
-    The name of `csv file` `doesn't have` to end with `.csv` or `path`.
     """
+    csv_file = TextIOWrapper(csv_file)
     X = list()
     Y = list()
     xlabel = ""
     ylabel = ""
-    with open(f'data/{name}.csv', 'r') as f :
-        reader = csv.DictReader(f)
-        xlabel, ylabel = reader.fieldnames
-        for pair in reader:
-                X.append(float(pair[xlabel]))
-                Y.append(float(pair[ylabel]))
-    f.close()
+    print(csv_file)
+    reader = csv.DictReader(csv_file)
+    print(reader)
+    xlabel, ylabel = reader.fieldnames
+    for pair in reader:
+            X.append(float(pair[xlabel]))
+            Y.append(float(pair[ylabel]))
     return {xlabel: X, ylabel: Y} 

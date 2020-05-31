@@ -17,7 +17,7 @@ def create_V(f, start, end, m):
     ----------
         f : function
             f(x)
-        start : float
+        start : int
             initial value (x)
         end : int
             final value (x)
@@ -114,7 +114,7 @@ def interpolation_by_function(f, method, start, stop, n, m):
             f(x)
         method : str
             method name
-        start : float
+        start : int
             initial value (x)
         end : int
             final value (x)

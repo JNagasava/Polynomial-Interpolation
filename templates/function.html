@@ -1,0 +1,154 @@
+{% extends "index.html" %}
+{% block content %}
+<script>
+    
+    // Interpolation values (from app.py)
+    var k = {{ k | safe }}
+    var n = {{ n | safe }}
+    var base_f = {{ base_f | safe }}
+    var dots_f = {{ dots_f | safe }}
+    var interpolation_f = {{ interpolation_f | safe }}
+
+    // Frames
+    var myframes = new Array()
+    for(var i = k; i <= n; i++){
+        tempdata = new Array()
+        tempdata.push({
+            x: base_f.values.x,
+            y: base_f.values.y,
+            'line.color': base_f.color,
+            'line.dash': base_f.dash,
+            mode: base_f.mode,
+            dash: base_f.dash
+        })
+        for(var f of interpolation_f){
+            tempdata.push({
+                x: f.values[i-k].x,
+                y: f.values[i-k].y,
+                'line.color': f.color,
+                'line.dash': f.dash,
+                mode: f.mode,
+                dash: f.dash
+            })
+        }
+        tempdata.push({
+            x: dots_f.values[i-k].x,
+            y: dots_f.values[i-k].y,
+            'marker.color': dots_f.color,
+            'marker.size': 10,
+            mode: dots_f.mode,
+            dash: dots_f.dash
+        })
+        frame = {
+            name: i.toString(),
+            data: tempdata
+        }
+        myframes.push(frame)
+    }
+    
+    // Steps
+    var mysteps = new Array()
+    for(var i = k; i <= n; i++){
+      step = {
+        label: i.toString(),
+        method: 'animate',
+        args: [[i.toString()], {
+          mode: 'immediate',
+          frame: {redraw: false, duration: 500},
+          transition: {duration: 500}
+        }]
+      }
+      mysteps.push(step)
+    }
+
+    // Initial data
+    mydata = new Array()
+    mydata.push({
+        x: base_f.values.x,
+        y: base_f.values.y,
+        name: base_f.name,
+        mode: base_f.mode,
+        line: {
+            dash: base_f.dash,
+            color: base_f.color,
+            simplify: false
+        }
+    })
+    for(var f of interpolation_f){
+        mydata.push({
+            x: f.values[0].x,
+            y: f.values[0].y,
+            name: f.name,
+            mode: f.mode,
+            line: {
+                dash: f.dash,
+                color: f.color,
+                simplify: false
+            },
+        })
+    }
+    mydata.push({
+        x: dots_f.values[0].x,
+        y: dots_f.values[0].y,
+        name: dots_f.name,
+        mode: dots_f.mode,
+        marker: {
+            color: dots_f.color,
+            size: 10,
+            simplify: false
+        }
+    })
+
+    // PLOT GRAPH
+    Plotly.newPlot('graph', {
+        // Mydata
+        data: mydata,
+        layout: {
+        sliders: [{
+            pad: {t: 30},
+            x: 0.05,
+            len: 0.95,
+            currentvalue: {
+                xanchor: 'right',
+                prefix: 'n: ',
+                font: {
+                    color: '#888',
+                    size: 20
+                }
+            },
+            transition: {duration: 500},
+            // Mysteps:
+            steps: mysteps
+        }],
+        updatemenus: [{
+            type: 'buttons',
+            showactive: false,
+            x: 0.09,
+            y: 0.06,
+            xanchor: 'right',
+            yanchor: 'top',
+            pad: {t: 70, r: 50},
+            buttons: [{
+                label: '  Play',
+                method: 'animate',
+                args: [null, {
+                    fromcurrent: true,
+                    frame: {redraw: false, duration: 1000},
+                    transition: {duration: 500}
+                }]
+            }, {
+                label: 'Pause',
+                method: 'animate',
+                args: [[null], {
+                    mode: 'immediate',
+                    frame: {duration: 0, redraw: false},
+                    transition: {duration: 0}
+                }]
+            }]
+        }]
+    },
+    // Myframes
+    frames: myframes });
+
+</script>
+{% endblock %}
