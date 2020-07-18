@@ -1,10 +1,13 @@
 {% extends "index.html" %}
 {% block content %}
+<div id="graph" style="width:1100px;height:700px;margin: auto auto;"></div>
+
 <script>
     
     // Interpolation values (from app.py)
     var k = {{ k | safe }}
     var n = {{ n | safe }}
+    var title = {{ title | safe }}
     var base_f = {{ base_f | safe }}
     var dots_f = {{ dots_f | safe }}
     var interpolation_f = {{ interpolation_f | safe }}
@@ -104,6 +107,35 @@
         // Mydata
         data: mydata,
         layout: {
+        title: {
+            text: title,
+            font: {
+                family: 'Courier New, monospace',
+                size: 24
+            },
+            xref: 'paper',
+            x: 0.05,
+        },
+        xaxis: {
+            title: {
+                text: 'x',
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            },
+        },
+        yaxis: {
+            title: {
+                text: 'y',
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            }
+        },
         sliders: [{
             pad: {t: 30},
             x: 0.05,

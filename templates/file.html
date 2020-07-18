@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+{% block content %}
+<div id="graph" style="width:1100px;height:700px;margin: auto auto;"></div>
+
+<script>
+    
+    var title = {{ title | safe }}
+    var xlabel = {{ xlabel | safe }}
+    var ylabel = {{ ylabel | safe }}
+    var dots_f = {{ dots_f | safe }}
+    var interpolation_f = {{ interpolation_f | safe }}
+
+    var data = new Array()
+
+    for(var f of interpolation_f){
+        data.push({
+            x: f.values.x,
+            y: f.values.y,
+            'line.color': f.color,
+            'line.dash': f.dash,
+            name: f.name,
+            mode: f.mode,
+            dash: f.dash
+        })
+    }
+
+    data.push({
+        x: dots_f.values[xlabel],
+        y: dots_f.values[ylabel],
+        'marker.color': dots_f.color,
+        'marker.size': 10,
+        name: dots_f.name,
+        mode: dots_f.mode,
+        dash: dots_f.dash
+    })
+
+    var layout = {
+        title: {
+            text: title,
+            font: {
+                family: 'Courier New, monospace',
+                size: 24
+            },
+            xref: 'paper',
+            x: 0.05,
+        },
+        xaxis: {
+            title: {
+                text: xlabel,
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            },
+        },
+        yaxis: {
+            title: {
+                text: ylabel,
+                font: {
+                    family: 'Courier New, monospace',
+                    size: 18,
+                    color: '#7f7f7f'
+                }
+            }
+        }
+    }
+
+    Plotly.newPlot('graph', data, layout);
+
+</script>
+{% endblock %}

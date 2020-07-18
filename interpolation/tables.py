@@ -44,14 +44,9 @@ def load_csv(csv_file):
         V : dict
             V is a dictionary which contains X and Y values. 
     """
-    csv_file = TextIOWrapper(csv_file)
     X = list()
     Y = list()
-    xlabel = ""
-    ylabel = ""
-    print(csv_file)
     reader = csv.DictReader(csv_file)
-    print(reader)
     xlabel, ylabel = reader.fieldnames
     for pair in reader:
             X.append(float(pair[xlabel]))
