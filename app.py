@@ -7,7 +7,7 @@ import plotly
 import io
 from flask import Flask, render_template, request, url_for
 import csv
-
+import math
 import importlib
 
 app = Flask(__name__)
@@ -112,4 +112,8 @@ def upload_file():
     return render_template('error.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+  import random, threading, webbrowser
+  port = 5000 + random.randint(0, 999)
+  url = f"http://127.0.0.1:{port}"
+  threading.Timer(1.25, lambda: webbrowser.open(url) ).start()
+  app.run(port=port, debug=False)

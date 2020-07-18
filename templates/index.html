@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Polynomial Interpolation</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .options{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 2%;
+        }
+    </style>
 </head>
 <body>
 
-    
     {% block content %}{% endblock %}
 
-    <a href='/'>Load Python function</a>
-
-    <form action="/csvfile" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileupload" id="fileToUpload">
-        <input type="submit" value="Upload File" name="submit">
-    </form>
+    <div class="options">
+        <a href='/'>Load Python function</a>
+        <form action="/csvfile" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileupload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
+    </div>
+    
 
 </body>
 </html>
