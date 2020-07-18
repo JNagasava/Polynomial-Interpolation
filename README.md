@@ -1,5 +1,12 @@
 # Polynomial Interpolation
 
+## Introduction
+Python application which makes graphs interpolating functions (and splines) from python functions or csv files.
+
+![](https://i.imgur.com/rA8eHJ2.gif)
+
+![](https://i.imgur.com/fq7uUUl.gif)
+
 ## Motivation
 An interpolation function can be used to know unknown values in a data set. There are different ways to find these values.
 
@@ -67,6 +74,23 @@ From the list of equations above, we have:
 ![](https://i.imgur.com/9nxV0kB.png)
 
 ![](https://i.imgur.com/ObkWS6L.png)
+
+## The Application
+
+### Function
+
+### CSV File
+
+## Resources and Tools
+
+https://convertio.co/pt/mkv-gif/
+
+https://plotly.com/
+
+https://hackmd.io/
+
+https://www.codecogs.com/latex/eqneditor.php?lang=pt-br
+
 
 
 
