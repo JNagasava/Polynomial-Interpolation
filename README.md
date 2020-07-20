@@ -42,10 +42,13 @@ The cofficient can be obtained by divided differences:
 
 ## Splines
 
-The previous methods help a lot to "estimate" data. But they are "inefficient" for a large data set (polynomial degree gets too large) and functions with data distribution (Runge Function). To solve this, we can make polynomial functions between each two nodes.
+The previous methods help a lot to "estimate" data. But they are "inefficient" for a large data set (polynomial degree gets too large) and functions with uniform distribution (for example: Runge Function). To solve this, we can make polynomial functions between each two nodes.
+
+### Linear Spline
+
+Linear splines makes a straight line for every two nodes
 
 ### Cubic Spline
-
 
 Cubic splines have a third degree k-equation for every two nodes
 

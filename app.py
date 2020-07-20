@@ -41,6 +41,7 @@ def make_function():
         linear_system = { 'name': 'linear system', 'values': list(), 'mode': 'lines', 'dash': 'solid', 'color': 'orange' } 
         lagrange = { 'name': 'lagrange', 'values': list(), 'mode': 'lines', 'dash': 'solid', 'color': 'yellow' }
         newton = { 'name': 'newton', 'values': list(), 'mode': 'lines', 'dash': 'solid', 'color': 'blue' }
+        linear_spline = { 'name': 'linear spline', 'values': list(), 'mode': 'lines', 'dash': 'solid', 'color': 'black' }
         cubic_spline = { 'name': 'cubic spline', 'values': list(), 'mode': 'lines', 'dash': 'solid', 'color': 'red' }
 
         # Make interpolations
@@ -55,6 +56,9 @@ def make_function():
           # Newton    
           newton['values'].append(ctrl.interpolation_by_function(f, 'newton', start, end, i, m))
 
+          # Linear Spline
+          linear_spline['values'].append(ctrl.interpolation_by_function(f, 'linear_spline', start, end, i, m))
+
           # Cubic Spline
           cubic_spline['values'].append(ctrl.interpolation_by_function(f, 'cubic_spline', start, end, i, m))
 
@@ -64,7 +68,7 @@ def make_function():
         title = json.dumps(title, cls=plotly.utils.PlotlyJSONEncoder)
         base_f = json.dumps(base_f, cls=plotly.utils.PlotlyJSONEncoder)
         dots_f = json.dumps(dots_f, cls=plotly.utils.PlotlyJSONEncoder)
-        interpolation_f = json.dumps([linear_system, lagrange, newton, cubic_spline], cls=plotly.utils.PlotlyJSONEncoder)
+        interpolation_f = json.dumps([linear_system, lagrange, newton, linear_spline, cubic_spline], cls=plotly.utils.PlotlyJSONEncoder)
 
         return render_template('function.html', k=k, n=n, title=title, base_f=base_f, dots_f=dots_f, interpolation_f=interpolation_f)
 
@@ -88,6 +92,7 @@ def upload_file():
             linear_system_V = ctrl.interpolation_by_values(V, 'linear_system', 201)
             lagrange_V = ctrl.interpolation_by_values(V, 'lagrange', 201)
             newton_V = ctrl.interpolation_by_values(V, 'newton', 201)
+            linear_spline_V = ctrl.interpolation_by_values(V, 'linear_spline', 201)
             cubic_spline_V = ctrl.interpolation_by_values(V, 'cubic_spline', 201)
 
             # Initialize
@@ -95,8 +100,9 @@ def upload_file():
             linear_system = { 'name': 'linear system', 'values': linear_system_V, 'mode': 'lines', 'dash': 'solid', 'color': 'orange' } 
             lagrange = { 'name': 'lagrange', 'values': lagrange_V, 'mode': 'lines', 'dash': 'solid', 'color': 'yellow' }
             newton = { 'name': 'newton', 'values': newton_V, 'mode': 'lines', 'dash': 'solid', 'color': 'blue' }
+            linear_spline = { 'name': 'linear spline', 'values': linear_spline_V, 'mode': 'lines', 'dash': 'solid', 'color': 'black' }
             cubic_spline = { 'name': 'cubic spline', 'values': cubic_spline_V, 'mode': 'lines', 'dash': 'solid', 'color': 'red' }
-            interpolation_f = json.dumps([linear_system, lagrange, newton, cubic_spline], cls=plotly.utils.PlotlyJSONEncoder)
+            interpolation_f = json.dumps([linear_system, lagrange, newton, linear_spline, cubic_spline], cls=plotly.utils.PlotlyJSONEncoder)
 
             # Layout
             xlabel = json.dumps(list(V.keys())[0], cls=plotly.utils.PlotlyJSONEncoder)

@@ -5,7 +5,8 @@ Controls interpolation methods and manages X and Y values
 import interpolation.methods.linear_system as lys
 import interpolation.methods.lagrange as lgr
 import interpolation.methods.newton as ntw
-import interpolation.methods.cubic_spline as spl
+import interpolation.methods.linear_spline as lspl
+import interpolation.methods.cubic_spline as cspl
 
 import numpy as np
 
@@ -91,7 +92,7 @@ def interpolation_method(method, X, Y):
     Notes
     -----
     The interpolation functions are : linear_system, lagrange,
-    newton and cubic_spline
+    newton, linear_spline and cubic_spline
     """
     if method == 'linear_system':
         return lys.linsys(X, Y)
@@ -99,8 +100,10 @@ def interpolation_method(method, X, Y):
         return lgr.lagrange(X, Y)
     elif method == 'newton':
         return ntw.newton(X, Y)
+    elif method == 'linear_spline':
+        return lspl.linear_spline(X, Y)
     elif method == 'cubic_spline':
-        return spl.cubic_spline(X, Y)
+        return cspl.cubic_spline(X, Y)
     else:
         return None
 
