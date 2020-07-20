@@ -13,32 +13,31 @@ An interpolation function can be used to know unknown values in a data set. Ther
 ## Methods
 Each point (x, y) of the data set can be interpreted by the following equation:
 
-![](https://i.imgur.com/WlHKxoa.png)
+<img src="./assets/polynomial_equation.png">
 
 ### Linear System
 To find the "a" coefficients, we can use a linear system:
 
-![](https://i.imgur.com/o0qtSNW.png)
-
+<img src="./assets/linear_system.png">
 
 ### Lagrange
 
 Another more efficient method than using linear system, is the lagrange method:
 
-![](https://i.imgur.com/AHqFBgh.png)
+<img src="./assets/lagrange.png">
 
 The cofficient can be obtained from:
 
-![](https://i.imgur.com/pqNmyQ0.png)
+<img src="./assets/lagrange_l.png">
 
 ### Newton
 The biggest problem with the Lagrange method is when a new value (x, y) is added, the polynomial function has to be rewritten. To solve this problem, we can use the newton method.
 
-![](https://i.imgur.com/UqFkMuv.png)
+<img src="./assets/newton.png">
 
 The cofficient can be obtained by divided differences:
 
-![](https://i.imgur.com/NvGBpEk.png)
+<img src="./assets/newton_f.png">
 
 ## Splines
 
@@ -48,35 +47,37 @@ The previous methods help a lot to "estimate" data. But they are "inefficient" f
 
 Linear splines makes a straight line for every two nodes
 
+<img src="./assets/linear_spline.png">
+
 ### Cubic Spline
 
 Cubic splines have a third degree k-equation for every two nodes
 
-![](https://i.imgur.com/6ZwXHs8.png)
+<img src="./assets/cubic_spline.png">
 
 The cofficients can be obtained from:
 
-![](https://i.imgur.com/eUGV8b4.png)
+<img src="./assets/cubic_spline_a.png">
 
-![](https://i.imgur.com/v0J42tE.png)
+<img src="./assets/cubic_spline_b.png">
 
-![](https://i.imgur.com/qC9ATV7.png)
+<img src="./assets/cubic_spline_c.png">
 
-![](https://i.imgur.com/niqmEeO.png)
+<img src="./assets/cubic_spline_d.png">
 
-![](https://i.imgur.com/p52SKkd.png)
+<img src="./assets/cubic_spline_h.png">
 
-for ![](https://i.imgur.com/QaAA9r5.png)
+for <img src="./assets/cubic_spline_k.png">
 
 From the list of equations above, we have:
 
-![](https://i.imgur.com/Qi9KwOp.png)
+<img src="./assets/cubic_spline_A.png">
 
-![](https://i.imgur.com/HGUkgdo.png)
+<img src="./assets/cubic_spline_x.png">
 
-![](https://i.imgur.com/9nxV0kB.png)
+<img src="./assets/cubic_spline_bb.png">
 
-![](https://i.imgur.com/ObkWS6L.png)
+<img src="./assets/Axb.png">
 
 ## The Application
 
