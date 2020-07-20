@@ -3,9 +3,9 @@
 ## Introduction
 Python application which makes graphs interpolating functions (and splines) from python functions or csv files.
 
-![](https://i.imgur.com/HcDZxu5.gif)
+<img src="./assets/function.gif">
 
-![](https://i.imgur.com/ehYHIcY.gif)
+<img src="./assets/csv.gif">
 
 ## Motivation
 An interpolation function can be used to know unknown values in a data set. There are different ways to find these values.
